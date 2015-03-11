@@ -120,21 +120,19 @@ void ofxSyphonClient::bind()
 		NSSize texSize = [(SyphonImage*)latestImage textureSize];
         
         // we now have to manually make our ofTexture's ofTextureData a proxy to our SyphonImage
+        ofTextureData texData;
+        texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;  // Syphon always outputs rect textures.
+        texData.glTypeInternal = GL_RGBA8;
+        texData.width = texSize.width;
+        texData.height = texSize.height;
+        texData.tex_w = texSize.width;
+        texData.tex_h = texSize.height;
+        texData.tex_t = texSize.width;
+        texData.tex_u = texSize.height;
+        texData.bFlipTexture = YES;
+        texData.bAllocated = YES;
+        mTex.allocate(texData);
         mTex.setUseExternalTextureID([(SyphonImage*)latestImage textureName]);
-        mTex.texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;  // Syphon always outputs rect textures.
-        mTex.texData.width = texSize.width;
-        mTex.texData.height = texSize.height;
-        mTex.texData.tex_w = texSize.width;
-        mTex.texData.tex_h = texSize.height;
-        mTex.texData.tex_t = texSize.width;
-        mTex.texData.tex_u = texSize.height;
-        mTex.texData.glTypeInternal = GL_RGBA;
-#if (OF_VERSION_MAJOR == 0) && (OF_VERSION_MINOR < 8)
-        mTex.texData.glType = GL_RGBA;
-        mTex.texData.pixelType = GL_UNSIGNED_BYTE;
-#endif
-        mTex.texData.bFlipTexture = YES;
-        mTex.texData.bAllocated = YES;
         
         mTex.bind();
     }
