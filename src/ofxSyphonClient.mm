@@ -124,7 +124,7 @@ void ofxSyphonClient::bind()
             // we now have to manually make our ofTexture's ofTextureData a proxy to our SyphonImage
             ofTextureData texData;
             texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;  // Syphon always outputs rect textures.
-            texData.glTypeInternal = GL_RGBA8;
+            texData.glTypeInternal = GL_RGBA;
             texData.width = texSize.width;
             texData.height = texSize.height;
             texData.tex_w = texSize.width;
@@ -184,7 +184,10 @@ void ofxSyphonClient::drawSubsection(float x, float y, float w, float h, float s
 {
     this->bind();
     
-    mTex.drawSubsection(x, y, w, h, sx, sy, sw, sh);
+    if(mTex.isAllocated())
+    {
+        mTex.drawSubsection(x, y, w, h, sx, sy, sw, sh);
+    }
     
     this->unbind();
 }
@@ -192,6 +195,15 @@ void ofxSyphonClient::drawSubsection(float x, float y, float w, float h, float s
 void ofxSyphonClient::drawSubsection(float x, float y, float sx, float sy, float sw, float sh)
 {
 	this->drawSubsection(x, y, mTex.texData.width, mTex.texData.height, sx, sy, sw, sh);
+}
+void ofxSyphonClient::save(string filename) {
+    if(mTex.isAllocated())
+    {
+        ofPixels pix;
+        updateCache();
+        mTexCache.readToPixels(pix);
+        ofSaveImage(pix, filename);
+    }
 }
 
 float ofxSyphonClient::getWidth()
@@ -204,4 +216,23 @@ float ofxSyphonClient::getHeight()
 	return mTex.texData.height;
 }
 
+void ofxSyphonClient::updateCache() {
+    if(mTex.isAllocated())
+    {
+        ofFbo::Settings settings;
+        settings.width = getWidth();
+        settings.height = getHeight();
+        settings.numSamples = 0;
+        settings.useDepth = false;
+        settings.useStencil = false;
+        mTexCache.allocate(settings);
+        mTexCache.begin();
+        ofPushStyle();
+        ofClear(0);
+        ofSetColor(255);
+        mTex.draw(0, 0);
+        ofPopStyle();
+        mTexCache.end();
+    }
+}
 

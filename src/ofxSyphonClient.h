@@ -34,18 +34,19 @@ class ofxSyphonClient {
     void draw(float x, float y);
     void drawSubsection(float x, float y, float w, float h, float sx, float sy, float sw, float sh);
     void drawSubsection(float x, float y, float sx, float sy, float sw, float sh);
-
-    ofTexture& getTexture() {
-        return mTex;
-    }
+    
+    void save(string filename);
     
 	float getWidth();
 	float getHeight();
     
 	protected:
+    void updateCache();
+    
 	void* mClient;
     void* latestImage;
-	ofTexture mTex;
+    ofTexture mTex;
+    ofFbo mTexCache;
 	int width, height;
 	bool bSetup;
     string appName, serverName;

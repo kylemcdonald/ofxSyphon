@@ -134,4 +134,9 @@ void testApp::keyPressed  (int key){
 	if (key == 's'){
 		bSmooth = !bSmooth;
 	}
+    if (key == ' ') {
+        mClient.save("out.png");
+        mClient.save("out.tiff");
+        mClient.save("out.jpg");
+    }
 }
