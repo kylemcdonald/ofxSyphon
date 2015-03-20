@@ -119,22 +119,25 @@ void ofxSyphonClient::bind()
         latestImage = [client newFrameImageForContext:CGLGetCurrentContext()];
 		NSSize texSize = [(SyphonImage*)latestImage textureSize];
         
-        // we now have to manually make our ofTexture's ofTextureData a proxy to our SyphonImage
-        ofTextureData texData;
-        texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;  // Syphon always outputs rect textures.
-        texData.glTypeInternal = GL_RGBA8;
-        texData.width = texSize.width;
-        texData.height = texSize.height;
-        texData.tex_w = texSize.width;
-        texData.tex_h = texSize.height;
-        texData.tex_t = texSize.width;
-        texData.tex_u = texSize.height;
-        texData.bFlipTexture = YES;
-        texData.bAllocated = YES;
-        mTex.allocate(texData);
-        mTex.setUseExternalTextureID([(SyphonImage*)latestImage textureName]);
-        
-        mTex.bind();
+        if(texSize.width && texSize.height)
+        {
+            // we now have to manually make our ofTexture's ofTextureData a proxy to our SyphonImage
+            ofTextureData texData;
+            texData.textureTarget = GL_TEXTURE_RECTANGLE_ARB;  // Syphon always outputs rect textures.
+            texData.glTypeInternal = GL_RGBA8;
+            texData.width = texSize.width;
+            texData.height = texSize.height;
+            texData.tex_w = texSize.width;
+            texData.tex_h = texSize.height;
+            texData.tex_t = texSize.width;
+            texData.tex_u = texSize.height;
+            texData.bFlipTexture = YES;
+            texData.bAllocated = YES;
+            mTex.allocate(texData);
+            mTex.setUseExternalTextureID([(SyphonImage*)latestImage textureName]);
+            
+            mTex.bind();
+        }
     }
     else
 		cout<<"ofxSyphonClient is not setup, or is not properly connected to server.  Cannot bind.\n";
@@ -164,7 +167,10 @@ void ofxSyphonClient::draw(float x, float y, float w, float h)
 {
     this->bind();
     
-    mTex.draw(x, y, w, h);
+    if(mTex.isAllocated())
+    {
+        mTex.draw(x, y, w, h);
+    }
     
     this->unbind();
 }

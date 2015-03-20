@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C194CE1F-E4B1-465E-8C92-6164573CC03C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OculusProgrammableRendering</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</key>
+		<string>github.com:kylemcdonald/openFrameworks.git</string>
+		<key>78AB47631027738A379B1D79552DD96DA53B104B</key>
+		<string>github.com:kylemcdonald/Highsight.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>UnwrapOculus/OculusProgrammableRendering.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</key>
+		<string>../../../../..</string>
+		<key>78AB47631027738A379B1D79552DD96DA53B104B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:kylemcdonald/Highsight.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>78AB47631027738A379B1D79552DD96DA53B104B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>78AB47631027738A379B1D79552DD96DA53B104B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Highsight</string>
+		</dict>
+	</array>
+</dict>
+</plist>
