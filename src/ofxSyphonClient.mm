@@ -135,6 +135,36 @@ void ofxSyphonClient::setServerName(string _serverName)
     }    
 }
 
+void ofxSyphonClient::save(string filename) {
+    if(mTex.isAllocated())
+    {
+        ofPixels pix;
+        updateCache();
+        mTexCache.readToPixels(pix);
+        ofSaveImage(pix, filename);
+    }
+}
+
+void ofxSyphonClient::updateCache() {
+    if(mTex.isAllocated())
+    {
+        ofFbo::Settings settings;
+        settings.width = getWidth();
+        settings.height = getHeight();
+        settings.numSamples = 0;
+        settings.useDepth = false;
+        settings.useStencil = false;
+        mTexCache.allocate(settings);
+        mTexCache.begin();
+        ofPushStyle();
+        ofClear(0);
+        ofSetColor(255);
+        mTex.draw(0, 0);
+        ofPopStyle();
+        mTexCache.end();
+    }
+}
+
 string& ofxSyphonClient::getApplicationName(){
     return appName;
 }
